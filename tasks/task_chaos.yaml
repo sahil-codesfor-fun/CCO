@@ -1,0 +1,23 @@
+name: chaos_traffic
+description: >
+  Hard task — Manage a server fleet under chaotic, non-stationary traffic with 
+  frequent unpredictable spikes, high noise, random bursts, and gradual organic 
+  growth. This genuinely challenges frontier models and tests the agent's ability 
+  to handle real-world complexity.
+difficulty: hard
+max_steps: 400
+initial_servers: 3
+traffic_profile: chaos
+seed: 42
+
+grading:
+  metrics:
+    sla_weight: 0.45
+    cost_weight: 0.20
+    latency_weight: 0.20
+    stability_weight: 0.15
+  
+  worst_case_cost: 200.0
+  best_case_cost: 60.0
+  latency_threshold_ms: 200.0
+  max_acceptable_drop_rate: 0.02

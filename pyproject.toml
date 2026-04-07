@@ -1,0 +1,102 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cloud-cost-optimizer"
+version = "1.0.0"
+description = "AI-powered auto-scaling simulation for cloud infrastructure cost optimization"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.9"
+authors = [
+    {name = "Himanshu Gahalyan", email = "himanshugahalyan06@gmail.com"},
+]
+keywords = ["reinforcement-learning", "cloud", "auto-scaling", "optimization", "ai"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: System :: Systems Administration",
+]
+dependencies = [
+    "gymnasium>=0.29.0",
+    "numpy>=1.24.0",
+    "pydantic>=2.0.0",
+    "pyyaml>=6.0.0",
+    "openai>=1.0.0",
+    "python-dotenv>=1.0.0",
+    "requests>=2.31.0",
+]
+
+[project.optional-dependencies]
+training = [
+    "stable-baselines3>=2.1.0",
+    "torch>=2.0.0",
+]
+dashboard = [
+    "streamlit>=1.28.0",
+    "pandas>=2.0.0",
+    "plotly>=5.15.0",
+    "matplotlib>=3.7.0",
+]
+api = [
+    "fastapi>=0.100.0",
+    "uvicorn>=0.23.0",
+]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+    "pytest-mock>=3.12.0",
+    "black>=24.0.0",
+    "isort>=5.13.0",
+    "flake8>=7.0.0",
+    "mypy>=1.8.0",
+]
+all = [
+    "cloud-cost-optimizer[training,dashboard,api,dev]",
+]
+
+[project.urls]
+Homepage = "https://github.com/himanshugahalyan06/Cloud_Cost_Optimizer"
+Repository = "https://github.com/himanshugahalyan06/Cloud_Cost_Optimizer"
+Issues = "https://github.com/himanshugahalyan06/Cloud_Cost_Optimizer/issues"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+addopts = "-v --tb=short --strict-markers"
+
+[tool.black]
+line-length = 120
+target-version = ["py39", "py310", "py311"]
+exclude = '''
+/(
+    \.git
+  | \.venv
+  | venv
+  | __pycache__
+  | node_modules
+  | frontend
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 120
+skip_glob = ["frontend/*", "node_modules/*"]
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true
+exclude = ["frontend/", "node_modules/"]

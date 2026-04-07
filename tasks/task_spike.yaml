@@ -1,0 +1,22 @@
+name: spike_traffic
+description: >
+  Medium task — Manage a server fleet under traffic with scheduled spike events 
+  simulating flash sales and marketing campaigns. The agent must learn to 
+  proactively scale up before spikes hit and efficiently scale down after.
+difficulty: medium
+max_steps: 360
+initial_servers: 3
+traffic_profile: spike
+seed: 42
+
+grading:
+  metrics:
+    sla_weight: 0.40
+    cost_weight: 0.25
+    latency_weight: 0.20
+    stability_weight: 0.15
+  
+  worst_case_cost: 180.0
+  best_case_cost: 50.0
+  latency_threshold_ms: 200.0
+  max_acceptable_drop_rate: 0.03

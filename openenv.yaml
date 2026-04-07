@@ -1,0 +1,41 @@
+name: cloud-cost-optimizer
+version: "1.0.0"
+description: >
+  A high-fidelity cloud infrastructure simulation where an RL agent manages a fleet 
+  of servers, making real-time scaling decisions to balance performance (SLA compliance) 
+  against cost. The environment models realistic traffic patterns including daily 
+  seasonality, flash-sale spikes, and random bursts. The agent must learn to provision 
+  and de-provision servers while respecting warm-up delays, latency thresholds, and 
+  budget constraints — mirroring real-world auto-scaling systems like Kubernetes HPA 
+  or AWS Auto Scaling.
+
+author: "Himanshu Gahalyan"
+license: "MIT"
+
+environment:
+  module: env.environment
+  class: CloudCostOptimizerEnv
+
+observation:
+  module: env.models
+  class: Observation
+
+action:
+  module: env.models
+  class: Action
+
+reward:
+  module: env.models
+  class: Reward
+
+tasks:
+  - tasks/task_steady.yaml
+  - tasks/task_spike.yaml
+  - tasks/task_chaos.yaml
+
+tags:
+  - reinforcement-learning
+  - cloud-computing
+  - auto-scaling
+  - cost-optimization
+  - systems-engineering

@@ -1,0 +1,45 @@
+# Cloud Cost Optimizer — Configuration
+# ──────────────────────────────────────────────────────────────────────────
+
+# Environment settings
+environment:
+  max_steps: 360
+  initial_servers: 2
+
+# Server fleet configuration
+server:
+  capacity_per_server: 50.0       # Max requests/sec per server
+  cost_per_server_per_step: 0.1   # $/step per active server
+  warmup_steps: 3                 # Steps for server to become active
+  base_latency_ms: 10.0           # Base latency at low utilization
+  latency_growth_factor: 5.0      # Exponential growth factor
+  max_servers: 50                 # Hard ceiling
+  min_servers: 1                  # Always at least 1
+  sla_latency_threshold_ms: 200.0 # SLA violation threshold
+
+# Reward function weights
+reward:
+  w_served: 0.01                  # Reward per served request (normalized)
+  w_cost: 0.5                    # Penalty per unit cost
+  w_dropped: 5.0                 # HEAVY penalty per dropped request
+  w_latency: 0.002               # Penalty per ms above threshold
+  w_efficiency: 0.1              # Bonus for optimal utilization
+  latency_threshold_ms: 100.0    # Soft latency target
+  optimal_cpu_low: 0.4           # Efficiency sweet spot lower
+  optimal_cpu_high: 0.75         # Efficiency sweet spot upper
+
+# Training defaults
+training:
+  algorithm: dqn                 # dqn or ppo
+  total_timesteps: 200000
+  learning_rate: 0.001
+  buffer_size: 50000
+  batch_size: 64
+  gamma: 0.99
+  seed: 42
+
+# Dashboard settings
+dashboard:
+  port: 8501
+  theme: dark
+  update_interval_ms: 100

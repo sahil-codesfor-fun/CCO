@@ -1,0 +1,26 @@
+name: steady_traffic
+description: >
+  Easy task — Manage a server fleet under steady, predictable traffic with 
+  mild daily seasonality. The agent must learn basic cost-optimization by 
+  right-sizing the fleet. No surprise spikes.
+difficulty: easy
+max_steps: 360
+initial_servers: 2
+traffic_profile: steady
+seed: 42
+
+grading:
+  # Score thresholds (0.0 to 1.0)
+  # Score is composed of: SLA compliance (40%), cost efficiency (30%), 
+  # latency performance (20%), stability (10%)
+  metrics:
+    sla_weight: 0.40
+    cost_weight: 0.30
+    latency_weight: 0.20
+    stability_weight: 0.10
+  
+  # Baselines for normalization
+  worst_case_cost: 180.0        # Static 50-server cost
+  best_case_cost: 36.0          # Theoretical minimum
+  latency_threshold_ms: 200.0   # SLA threshold
+  max_acceptable_drop_rate: 0.05
